@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Users;
 
 class User extends Controller
 {
@@ -12,7 +13,7 @@ class User extends Controller
                 'title' => 'Users',
                 'description' => 'Registered users in our system.'
             ],
-            'data' => $this->data,
+            'data' => Users::all(),
         ]);
     }
 }

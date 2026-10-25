@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customers;
 
 class Customer extends Controller
 {
@@ -12,7 +13,7 @@ class Customer extends Controller
                 'title' => 'Customers',
                 'description' => 'Registered customers in our system.'
             ],
-            'data' => $this->data,
+            'data' => Customers::all(),
         ]);
     }
 }

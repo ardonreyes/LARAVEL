@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Users;
 
 class Home extends Controller
 {
@@ -13,7 +14,7 @@ class Home extends Controller
                 'description' => 'Welcome, manage your POS.'
             ],
             'data' => [
-                'userCount' => count($this->data)
+                'userCount' => count(Users::all())
             ],
         ]);
     }
