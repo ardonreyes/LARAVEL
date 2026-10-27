@@ -6,11 +6,11 @@
         <h2>CORP</h2>
     </div>
     <div class="bg-white mx-2 md:mx-5"></div>
-    <div class="animation_link-btn pt-4 flex flex-col gap-3 font">
-        <a href="{{ url('/') }}">Home</a>
-        <a href="{{ url('/about') }}">About</a>
-        <a href="{{ url('/customers') }}">Customers</a>
-        <a href="{{ url('/users') }}">Users</a>
+    <div class="animation_link-btn pt-4 flex flex-col gap-3 items-center">
+        <a href="{{ url('/') }}" class="p-1 w-8/10">Home</a>
+        <a href="{{ url('/about') }}" class="p-1 w-8/10">About</a>
+        <a href="{{ url('/customers') }}" class="p-1 w-8/10">Customers</a>
+        <a href="{{ url('/users') }}" class="p-1 w-8/10">Users</a>
     </div>
     <a href="{{ url('/logout') }}" class='absolute right-2 bottom-2 lg:right-auto lg:left-2 lg:-scale-x-100 opacity-0'>
         <i class="fa fa-sign-out"></i>

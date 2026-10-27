@@ -25,11 +25,11 @@
     <div class="grid grid-cols-2 grid-rows-[1fr_50px] gap-2 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] animation_link-btn">
         <h3 class='col-span-full -mb-1'>Quick Actions</h3>
         <a href="{{ url('/users') }}" class="card quick_action-btn">
-            <i class="fa-solid fa-users text-slate-600"></i>
+            <i class="fa-solid fa-users text-white"></i>
             Customers
         </a>
         <a href="{{ url('/users') }}" class="card quick_action-btn">
-            <i class="fa-solid fa-user-group text-slate-600"></i>
+            <i class="fa-solid fa-user-group text-white"></i>
             Users
         </a>
     </div>
