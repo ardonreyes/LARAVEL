@@ -20,5 +20,8 @@
         </div>
         @include('component.footer')
     </section>
+    @if (request()->is('users', 'users/*', 'customers', 'customers/*'))
+        @include('component.form-modal')
+    @endif
 </body>
 </html>
