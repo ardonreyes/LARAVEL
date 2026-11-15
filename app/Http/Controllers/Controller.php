@@ -16,7 +16,7 @@ abstract class Controller
 
         if (request()->is('customers/*')) {
             $rules['email'] = ['required', 'email', 'max:100', Rule::unique('customers', 'email')->ignore($id)];
-            $rules['phone'] = ['required', 'regex:/^0[0-9]{10}$/', Rule::unique('customers', 'phone')->ignore($id)];
+            $rules['phone'] = ['required', 'regex:/^0[0-9]{9}$/', Rule::unique('customers', 'phone')->ignore($id)];
         } else {
             $rules['username'] = ['required', 'string', 'regex:/^[\p{L}\p{N}_-]+$/u', 'min:2', 'max:50', Rule::unique('users', 'username')->ignore($id)];
             $rules['role'] = ['required', Rule::in([$id === null ? 'User' : Users::getData($id)->role])];
