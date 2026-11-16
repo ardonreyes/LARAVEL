@@ -7,7 +7,7 @@
     <p data-record-feedback class="card feedback-{{ session('feedback_type', 'success') }} col-span-full text-center uppercase font-bold" @if (! session('feedback')) hidden @endif>{{ session('feedback') }}</p>
 
     @foreach ($data as $key)
-        <article
+        <div
             class="card grid-cols-[minmax(0,1fr)_auto] gap-3 my-3 md:my-0"
             data-record-id="{{ $key['id'] }}"
             data-full-name="{{ $key['full_name'] }}"
@@ -38,7 +38,7 @@
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </div>
-        </article>
+        </div>
     @endforeach
 </div>
 

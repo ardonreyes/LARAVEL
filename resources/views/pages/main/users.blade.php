@@ -7,17 +7,21 @@
     <p data-record-feedback class="card feedback-{{ session('feedback_type', 'success') }} col-span-full text-center uppercase font-bold" @if (! session('feedback')) hidden @endif>{{ session('feedback') }}</p>
 
     @foreach ($data as $key)
-        <article
+        <div
             class="card grid-cols-[minmax(0,1fr)_auto] gap-3 my-3 md:my-0"
             data-record-id="{{ $key['id'] }}"
             data-full-name="{{ $key['full_name'] }}"
             data-username="{{ $key['username'] }}"
             data-role="{{ $key['role'] }}"
+            data-profile="{{ asset($key['profile'] ?: 'img/default-profile.jpg') }}"
         >
-            <div class="min-w-0 break-words">
-                <h4>{{ $key['full_name'] }}</h4>
-                <p>{{ $key['username'] }}</p>
-                <p>{{ $key['role'] }}</p>
+            <div class="flex min-w-0 items-center gap-3 break-words">
+                <img src="{{ asset($key['profile'] ?: 'img/default-profile.jpg') }}" alt="{{ $key['full_name'] }} profile" class="size-16 shrink-0 rounded-full object-cover">
+                <div class="min-w-0">
+                    <h4>{{ $key['full_name'] }}</h4>
+                    <p>{{ $key['username'] }}</p>
+                    <p>{{ $key['role'] }}</p>
+                </div>
             </div>
             <div class="flex flex-col items-center justify-start sm:flex-row sm:items-start">
                 <a
@@ -38,7 +42,7 @@
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </div>
-        </article>
+        </div>
     @endforeach
 </div>
 

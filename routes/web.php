@@ -1,13 +1,10 @@
 <?php
 
+use App\Http\Controllers\About;
+use App\Http\Controllers\Customer;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\{
-    Home,
-    About,
-    Customer,
-    User,
-};
 
 // Page routes
 Route::get('/', [Home::class, 'page']);
@@ -23,8 +20,8 @@ Route::get('/customers/edit/{num}', [Customer::class, 'read'])->whereNumber('num
 Route::get('/customers/delete/{num}', [Customer::class, 'read'])->whereNumber('num');
 
 Route::post('/customers/create', [Customer::class, 'create']);
-Route::post('/customers/edit/{num}', [Customer::class, 'update'])->whereNumber('num');
+Route::patch('/customers/edit/{num}', [Customer::class, 'update'])->whereNumber('num');
 Route::delete('/customers/delete/{num}', [Customer::class, 'delete'])->whereNumber('num');
 Route::post('/users/create', [User::class, 'create']);
-Route::post('/users/edit/{num}', [User::class, 'update'])->whereNumber('num');
+Route::patch('/users/edit/{num}', [User::class, 'update'])->whereNumber('num');
 Route::delete('/users/delete/{num}', [User::class, 'delete'])->whereNumber('num');

@@ -19,11 +19,19 @@
 /public/build
 /public/fonts-manifest.dev.json
 /public/hot
+/public/img/profiles
 /public/storage
 /storage/*.key
 /storage/pail
 /vendor
 /tests
+
+# Laravel Boost agent files
+/.agents/
+/.claude/
+/.mcp.json
+/boost.json
+
 _ide_helper.php
 Homestead.json
 Homestead.yaml

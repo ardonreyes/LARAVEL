@@ -31,23 +31,26 @@
         @endforeach
     </div>
 
-    <form action="{{ url($resource.'/'.($modalRecord ? $initialMode.'/'.$modalRecord->id : 'create')) }}" method="post" data-record-form class="grid gap-3 mt-2" novalidate>
+    <form action="{{ url($resource.'/'.($modalRecord ? $initialMode.'/'.$modalRecord->id : 'create')) }}" method="post" enctype="multipart/form-data" data-record-form class="grid gap-3 mt-2" novalidate>
         @csrf
-        <input type="hidden" name="_method" value="{{ $initialMode === 'delete' ? 'DELETE' : 'POST' }}">
+        @if ($initialMode === 'edit')
+            @method('PATCH')
+        @elseif ($initialMode === 'delete')
+            @method('DELETE')
+        @else
+            @method('POST')
+        @endif
         <p data-delete-confirmation @if ($initialMode !== 'delete') hidden @endif>Are you sure you want to delete <strong data-delete-name>{{ $modalRecord?->full_name }}</strong>?</p>
         <fieldset data-record-fields class="grid gap-3" @if ($initialMode === 'delete') hidden disabled @endif>
-        <!-- <label class="profile-picker" for="user-add-profile" title="Choose profile image">
-            <img src=""
-            <span class="profile-picker-overlay">
-                <i class="fa-solid fa-camera"></i>
-            </span>
-            <input
-                type="file"
-                id="user-add-profile"
-                name="profile"
-                accept="image/jpeg,image/png"
-            >
-        </label> -->
+        @unless ($isCustomer)
+            <label class="profile-picker" for="record-profile" title="Choose profile image">
+                <img src="{{ asset($modalRecord?->profile ?: 'img/default-profile.jpg') }}" alt="Profile preview" data-profile-preview data-default-profile="{{ asset('img/default-profile.jpg') }}">
+                <span class="profile-picker-overlay" aria-hidden="true">
+                    <i class="fa-solid fa-camera"></i>
+                </span>
+                <input type="file" id="record-profile" name="profile" accept=".jpg,.jpeg,.png,image/jpeg,image/png" aria-label="Choose profile image">
+            </label>
+        @endunless
 
         <div class="modal-form-field">
             <label for="record-full-name">Full Name:</label>

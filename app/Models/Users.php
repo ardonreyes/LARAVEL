@@ -8,5 +8,14 @@ class Users extends BaseModel
         'full_name',
         'username',
         'role',
+        'profile',
+        'password',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 }

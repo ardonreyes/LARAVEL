@@ -19,12 +19,36 @@ if (recordModal) {
     const form = recordModal.querySelector('[data-record-form]');
     const title = document.getElementById('record-modal-title');
     const feedback = recordModal.querySelector('[data-form-feedback]');
+    const profileInput = form.elements.namedItem('profile');
+    const profilePreview = form.querySelector('[data-profile-preview]');
     const baseUrl = new URL(recordModal.dataset.baseUrl, window.location.href);
     const basePath = baseUrl.pathname.replace(/\/$/, '');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let closeTimer;
     let animationFrame;
     let returnFocus;
+    let profilePreviewUrl;
+
+    function resetProfilePreview(card) {
+        if (!profilePreview) return;
+        if (profilePreviewUrl) URL.revokeObjectURL(profilePreviewUrl);
+        profilePreviewUrl = null;
+        profilePreview.src = card?.dataset.profile || profilePreview.dataset.defaultProfile;
+    }
+
+    profileInput?.addEventListener('change', () => {
+        const [file] = profileInput.files;
+        const card = document.querySelector(`.card[data-record-id="${modalRoute()?.id}"]`);
+        resetProfilePreview(card);
+        if (file && ['image/jpeg', 'image/png'].includes(file.type)) {
+            profilePreviewUrl = URL.createObjectURL(file);
+            profilePreview.src = profilePreviewUrl;
+        }
+    });
+
+    window.addEventListener('beforeunload', () => {
+        if (profilePreviewUrl) URL.revokeObjectURL(profilePreviewUrl);
+    });
 
     function modalRoute(url = new URL(window.location.href)) {
         if (url.origin !== baseUrl.origin) return null;
@@ -59,12 +83,13 @@ if (recordModal) {
         if (!initial) {
             form.reset();
             feedback.hidden = true;
-            for (const field of form.querySelectorAll('input:not([type="hidden"])')) {
+            for (const field of form.querySelectorAll('input:not([type="hidden"]):not([type="file"])')) {
                 const key = field.name.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
                 field.value = card ? (card.dataset[key] ?? '') : (field.name === 'role' ? 'User' : '');
             }
         }
-        form.elements.namedItem('_method').value = deleting ? 'DELETE' : 'POST';
+        resetProfilePreview(card);
+        form.elements.namedItem('_method').value = deleting ? 'DELETE' : (route.mode === 'edit' ? 'PATCH' : 'POST');
 
         if (!recordModal.open) {
             returnFocus = trigger ?? document.activeElement;
