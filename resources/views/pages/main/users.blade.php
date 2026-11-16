@@ -16,7 +16,7 @@
             data-profile="{{ asset($key['profile'] ?: 'img/default-profile.jpg') }}"
         >
             <div class="flex min-w-0 items-center gap-3 break-words">
-                <img src="{{ asset($key['profile'] ?: 'img/default-profile.jpg') }}" alt="{{ $key['full_name'] }} profile" class="size-16 shrink-0 rounded-full object-cover">
+                <img src="{{ asset($key['profile'] ?: 'img/default-profile.jpg') }}" alt="{{ $key['full_name'] }} profile" class="size-16 shrink-0 rounded-full object-cover border border-slate-600">
                 <div class="min-w-0">
                     <h4>{{ $key['full_name'] }}</h4>
                     <p>{{ $key['username'] }}</p>
